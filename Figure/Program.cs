@@ -28,32 +28,35 @@ namespace Figure
                         Console.WriteLine("2. Add Rectangle");
                         Console.WriteLine("3. Exit");
                         int number = Convert.ToInt32(Console.ReadLine());
-
-                        if (number == 1)
+                        
+                        
+                        switch (number)
                         {
-                            Console.Clear();
-                            Console.Write("Enter radius circle: ");
-                            double radius = Convert.ToDouble(Console.ReadLine());
-                            shape.Add(new Circle(radius));
-                            continue;
+                            case 1:
 
-                        }  //add circle 
-                        else if (number == 2)
-                        {
-                            Console.Clear();
-                            Console.Write("Enter width rectangle: ");
-                            double width = Convert.ToDouble(Console.ReadLine());
-                            Console.Write("Enter height rectangle: ");
-                            double height = Convert.ToDouble(Console.ReadLine());
-                            shape.Add(new Rectangle(width, height));
-                            continue;
-                        } // add rectangle
-                        else if (number == 3) { break; } //exit
+                                Console.Clear();
+                                Console.Write("Enter radius circle: ");
+                                double radius = Convert.ToDouble(Console.ReadLine());
+                                shape.Add(new Circle(radius));
+                                continue;
+                            //add circle 
+                            case 2:
+                                Console.Clear();
+                                Console.Write("Enter width rectangle: ");
+                                double width = Convert.ToDouble(Console.ReadLine());
+                                Console.Write("Enter height rectangle: ");
+                                double height = Convert.ToDouble(Console.ReadLine());
+                                shape.Add(new Rectangle(width, height));
+                                continue;
+                            // add rectangle
+                            case 3:
+                                break;
+                            //exit
 
-                        else // error
-                        {
-                            Error(1, 3);
-                            continue;
+                            default: // error
+
+                                Error(1, 3);
+                                continue;
                         }
                     }
                 } // Add shape
