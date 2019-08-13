@@ -6,6 +6,8 @@ namespace Figure
 {
     class Program
     {
+        private const int V = 3;
+
         static void Main(string[] args)
         {
             Console.WriteLine("\t***Figura***");
@@ -16,94 +18,89 @@ namespace Figure
                 Console.WriteLine("2. View shapes");
                 Console.WriteLine("3. Remove shape");
                 Console.WriteLine("4. Exit");
-                int choice = Convert.ToInt32(Console.ReadLine());
 
-                if (choice == 1)
+                switch (Convert.ToInt32(Console.ReadLine()))
                 {
-                    Console.Clear();
-                    while (true)
-                    {
-
-                        Console.WriteLine("1. Add Circle");
-                        Console.WriteLine("2. Add Rectangle");
-                        Console.WriteLine("3. Exit");
-                        int number = Convert.ToInt32(Console.ReadLine());
-                        
-                        
-                        switch (number)
+                    case 1: // Add shape
+                        Console.Clear();                        
+                        while (true)
                         {
-                            case 1:
 
-                                Console.Clear();
-                                Console.Write("Enter radius circle: ");
-                                double radius = Convert.ToDouble(Console.ReadLine());
-                                shape.Add(new Circle(radius));
-                                continue;
-                            //add circle 
-                            case 2:
-                                Console.Clear();
-                                Console.Write("Enter width rectangle: ");
-                                double width = Convert.ToDouble(Console.ReadLine());
-                                Console.Write("Enter height rectangle: ");
-                                double height = Convert.ToDouble(Console.ReadLine());
-                                shape.Add(new Rectangle(width, height));
-                                continue;
-                            // add rectangle
-                            case 3:
-                                break;
-                            //exit
+                            Console.WriteLine("1. Add Circle");
+                            Console.WriteLine("2. Add Rectangle");
+                            Console.WriteLine("3. Exit");
 
-                            default: // error
+                            switch (Convert.ToInt32(Console.ReadLine()))
+                            {
+                                case 1: // add circle 
 
-                                Error(1, 3);
-                                continue;
+                                    Console.Clear();
+                                    Console.Write("Enter radius circle: ");
+                                    double radius = Convert.ToDouble(Console.ReadLine());
+                                    shape.Add(new Circle(radius));
+                                    continue;
+
+                                case 2: // add rectangle
+                                    Console.Clear();
+                                    Console.Write("Enter width rectangle: ");
+                                    double width = Convert.ToDouble(Console.ReadLine());
+                                    Console.Write("Enter height rectangle: ");
+                                    double height = Convert.ToDouble(Console.ReadLine());
+                                    shape.Add(new Rectangle(width, height));
+                                    continue;
+
+                                case 3: // exit
+                                    break;
+
+
+                                default: // error
+                                    Error(1, 3);
+                                    continue;
+                            }
                         }
-                    }
-                } // Add shape
+                                            
+                    case 2: // View shapes
+                        {
+                            Console.Clear();
+                            int i = 1;
+                            foreach (Shape s in shape)
+                            {
+                                Console.WriteLine($"Circle {i} area: {s.Area()} lenght: {s.Perimeter()}");
+                                i++;
+                            }
+                            break;
+                        }
 
-                else if (choice == 2)
-                {
-                    Console.Clear();
-                    int i = 1;
-                    foreach (Shape s in shape)
-                    {
-                        Console.WriteLine($"Circle {i} area: {s.Area()} lenght: {s.Perimeter()}");
-                        i++;
-                    }
-                } // View shapes
-
-                else if (choice == 3)
-                {
-                    Console.Clear();
+                    case 3: // Remove shapes
+                        {
+                            Console.Clear();
 
 
-                    int i = 1;
-                    foreach (Shape s in shape)
-                    {
-                        Console.WriteLine($"Circle {i} area: {s.Area()} lenght: {s.Perimeter()}");
-                        i++;
-                    }
-                    Console.WriteLine("0. Exit");
-                    Console.WriteLine("Enter number shape what you want delete or 0 for exit : ");
-                    int number = Convert.ToInt32(Console.ReadLine());
-                    if (number == 0)
-                    {
-                        continue;
-                    }
-                    shape.RemoveAt(number - 1);
+                            int i = 1;
+                            foreach (Shape s in shape)
+                            {
+                                Console.WriteLine($"Circle {i} area: {s.Area()} lenght: {s.Perimeter()}");
+                                i++;
+                            }
+                            Console.WriteLine("0. Exit");
+                            Console.WriteLine("Enter number shape what you want delete or 0 for exit : ");
+                            int number = Convert.ToInt32(Console.ReadLine());
+                            if (number == 0)
+                            {
+                                continue;
+                            }
+                            shape.RemoveAt(number - 1);
 
-                } // Remove shapes
+                            break;
+                        }
 
-                else if (choice == 4)
-                {
-                    return;
-                } // Exit
+                    case 4: // Exit
+                        return;                        
 
-                else
-                {
-                    Error(1, 4);
-                    continue;
-                } // Error
+                    default: // Error                       
+                            Error(1, 4);
+                            continue;                         
+                }
             }
 
             void Error(int from, int to)
